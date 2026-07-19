@@ -44,6 +44,15 @@ flows, using metaphors to build up to the real circuit:
   started rolling. The extra time also gave the closing line a longer,
   more comfortable hold instead of cutting off right after the stagger
   finished.
+- Bug fixed: the charge ball drifted off the slope line during its scale
+  tweens (fade-in, bounce landing, resting pulse). Cause: `#charge-ball`
+  was missing `transform-box: fill-box; transform-origin: 50% 50%` — without
+  it, SVG's default transform-origin is the *viewport's* origin, not the
+  element's own center, so scaling shifted the ball's rendered position away
+  from its `motionPath` coordinate. `#battery-group`/`#bulb-group` already
+  had this rule (that's why they didn't show the bug); any future SVG
+  element combining `scale` with `motionPath` or positional tweens needs it
+  too.
 - Style: dark background throughout; teal = water/metaphor, violet/gold =
   force/voltage, electric-cyan + warm amber = electricity/reality. Each wipe's
   color shift *is* the metaphor payoff. Oswald (display) + IBM Plex Mono
