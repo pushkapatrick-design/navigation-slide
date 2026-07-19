@@ -595,10 +595,13 @@
         { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" },
         9.0,
       );
+      // Straight-line roll: tween the circle's own cx/cy attributes directly rather than
+      // MotionPathPlugin - the path is just a line, and this guarantees the ball's position
+      // is always exactly the line's own coordinates (motionPath was landing it ~98px off).
       tl.to(
         "#charge-ball",
         {
-          motionPath: { path: "#hill-edge", autoRotate: false },
+          attr: { cx: 850, cy: 450 },
           duration: 1.6,
           ease: "power2.in",
         },
@@ -665,16 +668,13 @@
         );
       }
 
-      // bulb lights with a punchy flash once current arrives
-      tl.to("#bulb-flash", { opacity: 0.55, duration: 0.18, ease: "power1.out" }, 17.1);
-      tl.to("#bulb-flash", { opacity: 0, duration: 0.55, ease: "power1.in" }, 17.28);
-      tl.to("#bulb-glow", { opacity: 0.95, duration: 0.3, ease: "power1.out" }, 17.1);
-      tl.to("#bulb-rays", { opacity: 1, duration: 0.3, ease: "power1.out" }, 17.1);
-      tl.to("#bulb-outline", { fill: "#3a2a12", duration: 0.3, ease: "power1.out" }, 17.1);
-      tl.fromTo("#bulb-group", { scale: 1 }, { scale: 1.12, duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1 }, 17.1);
+      // bulb lights with a calm, simple fade once current arrives - no flash burst, no scale pop
+      tl.to("#bulb-glow", { opacity: 0.95, duration: 0.7, ease: "power1.out" }, 17.1);
+      tl.to("#bulb-rays", { opacity: 1, duration: 0.7, ease: "power1.out" }, 17.1);
+      tl.to("#bulb-outline", { fill: "#3a2a12", duration: 0.7, ease: "power1.out" }, 17.1);
 
       // ambient glow pulse keeps the lit bulb feeling alive through the longer hold
-      tl.to("#bulb-glow", { opacity: 0.78, duration: 1.0, ease: "sine.inOut", yoyo: true, repeat: 4 }, 17.6);
+      tl.to("#bulb-glow", { opacity: 0.78, duration: 1.0, ease: "sine.inOut", yoyo: true, repeat: 4 }, 17.9);
 
       /* =========================================================
          Scene 4 — kinetic-type close (per-word stagger)

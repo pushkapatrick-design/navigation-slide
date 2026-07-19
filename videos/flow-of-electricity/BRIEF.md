@@ -73,6 +73,28 @@ flows, using metaphors to build up to the real circuit:
   0.9 -> 1` over 0.45s with `ease: "power2.out"` (smooth, no overshoot).
   Applied to both battery and bulb since they shared the identical bouncy
   pattern — smoothing only one would have made them visually inconsistent.
+- **Root-caused the ball-on-line bug.** The "ball rides the line directly"
+  fix above still wasn't actually correct — user feedback ("still not
+  rolling on top of the yellow line") plus a pixel-precision check (sampling
+  ball-color pixels in rendered frames, comparing centroid to the line's own
+  equation) found `motionPath: { path: "#hill-edge" }` was landing the ball
+  a *constant* ~98px (canvas px) / ~70 SVG-units below the visible line at
+  every point along the roll — a real MotionPathPlugin quirk on this
+  element, invisible in a small thumbnail but obvious at full resolution or
+  measured precisely. Fixed by dropping MotionPathPlugin for this element
+  entirely and tweening the circle's own `cx`/`cy` attributes directly
+  (`attr: { cx: 850, cy: 450 }`) — since the path is just a straight line,
+  this needs no path-tracing and sidesteps whatever transform-composition
+  issue MotionPathPlugin had here. Verified pixel-exact on the visible line
+  at full resolution before re-rendering. **Lesson: don't trust a small
+  contact-sheet thumbnail to validate exact-alignment claims — measure
+  precisely (pixel sampling) or inspect a full-resolution single frame.**
+- Simplified the bulb "lights up" moment from a flash-burst + scale-pop to a
+  plain, calm fade (per user: "too aggressive... fade in instead") — removed
+  the `#bulb-flash` burst and the `scale: 1 -> 1.12` pop entirely; the glow/
+  rays/fill now just fade in together over 0.7s with `power1.out`. The
+  ambient post-light-up glow pulse (ballast/breathing effect during the
+  hold) is unchanged.
 - Reworked the two wipe transitions to be uniform: previously a
   scaleY-cover-then-opacity-fade combo (asymmetric feel). Now both are the
   identical directional slide — `x` from off-screen-left to 0 (cover), hold,
@@ -84,8 +106,10 @@ flows, using metaphors to build up to the real circuit:
   (labels).
 - Deliberately varies animation technique per scene: scrolling-texture fluid
   motion + straight-line particle drift (water), a uniform directional-slide
-  wipe between scenes, SVG stroke-draw + GSAP MotionPathPlugin (voltage hill,
-  circuit loop), per-word kinetic-type stagger (close).
+  wipe between scenes, SVG stroke-draw + attr-based straight-line tween
+  (voltage hill) + GSAP MotionPathPlugin (circuit's closed-loop current
+  flow, unaffected by the above bug since it never showed the same offset),
+  per-word kinetic-type stagger (close).
 - Water-pipe visuals were revised after user feedback that v1 (a plain teal
   capsule with candy-stripe texture) didn't read as a pipe. v2 adds a metal
   casing with joint bands, flange rings at the pump/valve connections, a
