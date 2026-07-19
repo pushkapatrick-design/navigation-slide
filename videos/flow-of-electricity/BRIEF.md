@@ -53,14 +53,26 @@ flows, using metaphors to build up to the real circuit:
   had this rule (that's why they didn't show the bug); any future SVG
   element combining `scale` with `motionPath` or positional tweens needs it
   too.
+- Bug fixed: even after the above, the ball's *center* rode exactly on the
+  `#hill-edge` line, so the ball visually straddled/sank into the slope
+  instead of resting on top of it. Fixed by adding an invisible `#ball-path`
+  parallel to `#hill-edge`, offset perpendicular by the ball's radius (24px)
+  in the direction away from the filled wedge, and motion-pathing the ball
+  along that instead — the ball is now tangent to the visible line, like it's
+  rolling on the surface, and still stops exactly at the slope's end point.
+- Reworked the two wipe transitions to be uniform: previously a
+  scaleY-cover-then-opacity-fade combo (asymmetric feel). Now both are the
+  identical directional slide — `x` from off-screen-left to 0 (cover), hold,
+  then `x` to off-screen-right (reveal) — same durations/eases for both;
+  only the gradient colors differ (teal→violet vs violet/gold→cyan).
 - Style: dark background throughout; teal = water/metaphor, violet/gold =
   force/voltage, electric-cyan + warm amber = electricity/reality. Each wipe's
   color shift *is* the metaphor payoff. Oswald (display) + IBM Plex Mono
   (labels).
 - Deliberately varies animation technique per scene: scrolling-texture fluid
-  motion + straight-line particle drift (water), scale-based wipe transitions,
-  SVG stroke-draw + GSAP MotionPathPlugin (voltage hill, circuit loop),
-  per-word kinetic-type stagger (close).
+  motion + straight-line particle drift (water), a uniform directional-slide
+  wipe between scenes, SVG stroke-draw + GSAP MotionPathPlugin (voltage hill,
+  circuit loop), per-word kinetic-type stagger (close).
 - Water-pipe visuals were revised after user feedback that v1 (a plain teal
   capsule with candy-stripe texture) didn't read as a pipe. v2 adds a metal
   casing with joint bands, flange rings at the pump/valve connections, a

@@ -201,8 +201,7 @@
       .wipe-panel {
         position: absolute;
         inset: 0;
-        transform: scaleY(0);
-        transform-origin: 50% 50%;
+        transform: translateX(-1920px);
       }
       #wipe-panel-1 {
         background: linear-gradient(120deg, #1c5a54 0%, #4b3f9e 55%, #7c6fef 100%);
@@ -424,6 +423,10 @@
 
             <polygon id="hill-wedge" points="150,150 150,450 850,450" fill="url(#hillGrad)" />
             <path id="hill-edge" class="slope-edge" d="M150,150 L850,450" />
+            <!-- invisible path parallel to hill-edge, offset by the ball's radius so the
+                 ball's motion tracks the slope's surface (tangent, resting on top) rather
+                 than its center riding the line itself -->
+            <path id="ball-path" d="M159.45,127.94 L859.45,427.94" fill="none" stroke="none" />
 
             <text id="label-high" class="potential-label" x="150" y="112" text-anchor="middle" fill="#ffd166">
               + HIGH POTENTIAL
@@ -449,7 +452,7 @@
               </text>
             </g>
 
-            <circle id="charge-ball" cx="150" cy="150" r="24" fill="#ffd166" />
+            <circle id="charge-ball" cx="159.45" cy="127.94" r="24" fill="#ffd166" />
           </svg>
         </div>
       </section>
@@ -571,8 +574,8 @@
       /* =========================================================
          Transition wipe 1: teal -> violet sweep covers, then reveals
          ========================================================= */
-      tl.fromTo("#wipe-panel-1", { scaleY: 0 }, { scaleY: 1, duration: 0.32, ease: "power2.in" }, 6.1);
-      tl.to("#wipe-panel-1", { opacity: 0, duration: 0.42, ease: "power2.out" }, 6.8);
+      tl.fromTo("#wipe-panel-1", { x: -1920 }, { x: 0, duration: 0.35, ease: "power2.inOut" }, 6.1);
+      tl.to("#wipe-panel-1", { x: 1920, duration: 0.35, ease: "power2.inOut" }, 6.75);
 
       /* =========================================================
          Scene 2 — force / voltage is the push
@@ -599,7 +602,7 @@
       tl.to(
         "#charge-ball",
         {
-          motionPath: { path: "#hill-edge", autoRotate: false },
+          motionPath: { path: "#ball-path", autoRotate: false },
           duration: 1.6,
           ease: "power2.in",
         },
@@ -616,8 +619,8 @@
       /* =========================================================
          Transition wipe 2: violet/gold -> electric cyan
          ========================================================= */
-      tl.fromTo("#wipe-panel-2", { scaleY: 0 }, { scaleY: 1, duration: 0.32, ease: "power2.in" }, 13.0);
-      tl.to("#wipe-panel-2", { opacity: 0, duration: 0.42, ease: "power2.out" }, 13.7);
+      tl.fromTo("#wipe-panel-2", { x: -1920 }, { x: 0, duration: 0.35, ease: "power2.inOut" }, 13.0);
+      tl.to("#wipe-panel-2", { x: 1920, duration: 0.35, ease: "power2.inOut" }, 13.65);
 
       /* =========================================================
          Scene 3 — the real circuit
