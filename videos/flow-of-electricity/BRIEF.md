@@ -60,6 +60,19 @@ flows, using metaphors to build up to the real circuit:
   in the direction away from the filled wedge, and motion-pathing the ball
   along that instead — the ball is now tangent to the visible line, like it's
   rolling on the surface, and still stops exactly at the slope's end point.
+- That offset attempt was reverted per explicit user feedback ("still not
+  rolling on top of the yellow line") — the user's actual intent was
+  simpler: the ball's center should ride the visible `#hill-edge` line
+  directly, start to end, no offset. Reverted to `motionPath: { path:
+  "#hill-edge" }` with the ball's initial `cx/cy` back at the line's start
+  (150,150); the `transform-box: fill-box` fix from the prior round stays
+  (that one was a real bug, confirmed independently of the offset question).
+- Smoothed the battery/bulb reveal in the circuit scene: was `scale: 0.8 ->
+  1` over 0.25s with `ease: "back.out(1.7)"` (bouncy overshoot, read as
+  "too aggressive" per user feedback on the bulb specifically). Now `scale:
+  0.9 -> 1` over 0.45s with `ease: "power2.out"` (smooth, no overshoot).
+  Applied to both battery and bulb since they shared the identical bouncy
+  pattern — smoothing only one would have made them visually inconsistent.
 - Reworked the two wipe transitions to be uniform: previously a
   scaleY-cover-then-opacity-fade combo (asymmetric feel). Now both are the
   identical directional slide — `x` from off-screen-left to 0 (cover), hold,
