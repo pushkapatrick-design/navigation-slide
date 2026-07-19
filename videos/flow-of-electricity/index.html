@@ -35,21 +35,19 @@
         inset: 0;
         display: block;
       }
-      #scene-water {
-        z-index: 1;
-      }
-      #scene-circuit {
-        z-index: 1;
-      }
-      #scene-close {
-        z-index: 1;
-      }
-      #scene-wipe {
-        z-index: 10;
-      }
       .scene-bg {
         position: absolute;
         inset: 0;
+      }
+      #scene-water,
+      #scene-force,
+      #scene-circuit,
+      #scene-close {
+        z-index: 1;
+      }
+      #scene-wipe-1,
+      #scene-wipe-2 {
+        z-index: 10;
       }
       .headline {
         position: absolute;
@@ -57,22 +55,9 @@
         left: 0;
         width: 100%;
         text-align: center;
-        font-size: 62px;
+        font-size: 58px;
         font-weight: 700;
         letter-spacing: 0.03em;
-        opacity: 0;
-      }
-      .sub-label {
-        position: absolute;
-        top: 186px;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 26px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: #9fe9ff;
         opacity: 0;
       }
 
@@ -84,43 +69,11 @@
         color: #3fe7c8;
         text-shadow: 0 0 26px rgba(63, 231, 200, 0.5);
       }
-      .pipe {
+      .flange {
         position: absolute;
-        left: 300px;
-        top: 470px;
-        width: 1320px;
-        height: 150px;
-        border-radius: 75px;
-        background: linear-gradient(180deg, #123837 0%, #0b2422 100%);
-        border: 4px solid #2f6e64;
-        box-shadow: 0 0 40px rgba(63, 231, 200, 0.25);
-        overflow: hidden;
-        opacity: 0;
-      }
-      .pipe-stripes {
-        position: absolute;
-        top: 0;
-        left: -1320px;
-        width: 2760px;
-        height: 100%;
-        background: repeating-linear-gradient(
-          115deg,
-          #1c5a54 0px,
-          #1c5a54 46px,
-          #2fa896 46px,
-          #2fa896 92px
-        );
-        opacity: 0.9;
-      }
-      .bubble {
-        position: absolute;
-        top: 50%;
-        left: 20px;
-        width: 46px;
-        height: 46px;
-        margin-top: -23px;
         border-radius: 50%;
-        background: radial-gradient(circle at 35% 30%, #eafffa 0%, #3fe7c8 55%, rgba(63, 231, 200, 0) 75%);
+        border: 6px solid #63767f;
+        background: radial-gradient(circle at 35% 30%, #59696f 0%, #232f34 100%);
         opacity: 0;
       }
       .pump {
@@ -132,12 +85,84 @@
         border-radius: 50%;
         background: radial-gradient(circle at 35% 30%, #6ff5df 0%, #159685 60%, #0c4b43 100%);
         border: 4px solid #3fe7c8;
-        box-shadow: 0 0 0 rgba(63, 231, 200, 0);
+        opacity: 0;
+      }
+      .pipe-casing {
+        position: absolute;
+        left: 280px;
+        top: 460px;
+        width: 1280px;
+        height: 170px;
+        border-radius: 85px;
+        background: linear-gradient(180deg, #4a5a62 0%, #232f34 45%, #161e22 55%, #4a5a62 100%);
+        border: 3px solid #63767f;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+        overflow: hidden;
+        opacity: 0;
+      }
+      .pipe-joint {
+        position: absolute;
+        top: 0;
+        width: 14px;
+        height: 100%;
+        background: rgba(8, 12, 14, 0.55);
+      }
+      .pipe-window {
+        position: absolute;
+        left: 14px;
+        top: 22px;
+        right: 14px;
+        bottom: 22px;
+        border-radius: 70px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #4fecd0 0%, #12564d 55%, #082622 100%);
+      }
+      .water-wave {
+        position: absolute;
+        top: 0;
+        left: -1400px;
+        width: 2820px;
+        height: 100%;
+        opacity: 0.28;
+        background: repeating-linear-gradient(
+          100deg,
+          rgba(255, 255, 255, 0.55) 0px,
+          rgba(255, 255, 255, 0.55) 3px,
+          rgba(255, 255, 255, 0) 3px,
+          rgba(255, 255, 255, 0) 70px
+        );
+      }
+      .water-wave.wave-2 {
+        opacity: 0.16;
+      }
+      .water-highlight {
+        position: absolute;
+        top: 14px;
+        left: -600px;
+        width: 2400px;
+        height: 18px;
+        border-radius: 9px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.6) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      }
+      .bubble {
+        position: absolute;
+        top: 55%;
+        left: 20px;
+        width: 38px;
+        height: 38px;
+        margin-top: -19px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #f2fffb 0%, #6ff5df 55%, rgba(63, 231, 200, 0) 78%);
         opacity: 0;
       }
       .valve {
         position: absolute;
-        left: 1560px;
+        left: 1544px;
         top: 494px;
         width: 102px;
         height: 102px;
@@ -155,7 +180,7 @@
       }
       .valve-rays {
         position: absolute;
-        left: 1611px;
+        left: 1595px;
         top: 545px;
         width: 0;
         height: 0;
@@ -172,16 +197,51 @@
         transform-origin: 3px 80px;
       }
 
-      /* ================= Transition wipe ================= */
+      /* ================= Transition wipes ================= */
       .wipe-panel {
         position: absolute;
         inset: 0;
-        background: linear-gradient(120deg, #1c5a54 0%, #1f7fae 55%, #6fe0ff 100%);
         transform: scaleY(0);
         transform-origin: 50% 50%;
       }
+      #wipe-panel-1 {
+        background: linear-gradient(120deg, #1c5a54 0%, #4b3f9e 55%, #7c6fef 100%);
+      }
+      #wipe-panel-2 {
+        background: linear-gradient(120deg, #5b4fd8 0%, #3f7fae 55%, #6fe0ff 100%);
+      }
 
-      /* ================= Scene 2 — the real circuit ================= */
+      /* ================= Scene 2 — force / voltage hill ================= */
+      #scene-force .scene-bg {
+        background: radial-gradient(circle at 50% 40%, #1c1840 0%, #070b14 70%);
+      }
+      #scene-force .headline {
+        color: #b9a8ff;
+        text-shadow: 0 0 26px rgba(124, 111, 239, 0.55);
+      }
+      .slope-edge {
+        fill: none;
+        stroke: #ffd166;
+        stroke-width: 6;
+        stroke-linecap: round;
+      }
+      #hill-wedge {
+        opacity: 0;
+      }
+      .potential-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 26px;
+        opacity: 0;
+      }
+      #voltage-bracket {
+        opacity: 0;
+      }
+      #charge-ball {
+        opacity: 0;
+        filter: drop-shadow(0 0 16px rgba(255, 209, 102, 0.9));
+      }
+
+      /* ================= Scene 3 — the real circuit ================= */
       #scene-circuit .scene-bg {
         background: radial-gradient(circle at 50% 38%, #0e1626 0%, #070b14 70%);
       }
@@ -264,7 +324,7 @@
         opacity: 0;
       }
 
-      /* ================= Scene 3 — kinetic close ================= */
+      /* ================= Scene 4 — kinetic close ================= */
       #scene-close .scene-bg {
         background: radial-gradient(circle at 50% 50%, #14243a 0%, #070b14 72%);
       }
@@ -301,22 +361,33 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="15"
+      data-duration="20"
       data-width="1920"
       data-height="1080"
     >
-      <!-- ============ Scene 1: water/pipe metaphor (0.0 - 5.3s) ============ -->
-      <section id="scene-water" class="clip" data-start="0" data-duration="5.3" data-track-index="0">
+      <!-- ============ Scene 1: water/pipe metaphor (0.0 - 5.6s) ============ -->
+      <section id="scene-water" class="clip" data-start="0" data-duration="5.6" data-track-index="0">
         <div class="scene-bg"></div>
         <div class="headline" id="water-title">Think of it like water</div>
 
+        <div class="flange" id="flange-pump" style="left: 140px; top: 454px; width: 182px; height: 182px"></div>
         <div class="pump" id="pump"></div>
-        <div class="pipe" id="pipe">
-          <div class="pipe-stripes" id="pipe-stripes" data-layout-allow-overflow></div>
-          <div class="bubble" id="bubble-0"></div>
-          <div class="bubble" id="bubble-1"></div>
-          <div class="bubble" id="bubble-2"></div>
+
+        <div class="pipe-casing" id="pipe-casing">
+          <div class="pipe-joint" style="left: 260px"></div>
+          <div class="pipe-joint" style="left: 620px"></div>
+          <div class="pipe-joint" style="left: 980px"></div>
+          <div class="pipe-window">
+            <div class="water-wave" id="wave-1" data-layout-allow-overflow></div>
+            <div class="water-wave wave-2" id="wave-2" data-layout-allow-overflow></div>
+            <div class="water-highlight" id="water-highlight" data-layout-allow-overflow></div>
+            <div class="bubble" id="bubble-0"></div>
+            <div class="bubble" id="bubble-1"></div>
+            <div class="bubble" id="bubble-2"></div>
+          </div>
         </div>
+
+        <div class="flange" id="flange-valve" style="left: 1528px; top: 478px; width: 134px; height: 134px"></div>
         <div class="valve" id="valve">
           <div class="valve-core" id="valve-core"></div>
         </div>
@@ -330,13 +401,64 @@
         </div>
       </section>
 
-      <!-- ============ Transition wipe (4.9 - 6.0s), top layer ============ -->
-      <section id="scene-wipe" class="clip" data-start="4.9" data-duration="1.1" data-track-index="9">
-        <div class="wipe-panel" id="wipe-panel"></div>
+      <!-- ============ Transition wipe 1: water -> force (4.8 - 6.1s) ============ -->
+      <section id="scene-wipe-1" class="clip" data-start="4.8" data-duration="1.3" data-track-index="9">
+        <div class="wipe-panel" id="wipe-panel-1"></div>
       </section>
 
-      <!-- ============ Scene 2: the real circuit (5.0 - 12.0s) ============ -->
-      <section id="scene-circuit" class="clip" data-start="5.0" data-duration="7.0" data-track-index="1">
+      <!-- ============ Scene 2: force / voltage is the push (5.0 - 10.5s) ============ -->
+      <section id="scene-force" class="clip" data-start="5.0" data-duration="5.5" data-track-index="1">
+        <div class="scene-bg"></div>
+        <div class="headline" id="force-title">That force is called voltage</div>
+
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hillGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffd166" stop-opacity="0.55" />
+                <stop offset="100%" stop-color="#5b4fd8" stop-opacity="0.55" />
+              </linearGradient>
+            </defs>
+
+            <polygon id="hill-wedge" points="150,150 150,450 850,450" fill="url(#hillGrad)" />
+            <path id="hill-edge" class="slope-edge" d="M150,150 L850,450" />
+
+            <text id="label-high" class="potential-label" x="150" y="112" text-anchor="middle" fill="#ffd166">
+              + HIGH POTENTIAL
+            </text>
+            <text id="label-low" class="potential-label" x="850" y="498" text-anchor="middle" fill="#8b7cf6">
+              &#8722; LOW POTENTIAL
+            </text>
+
+            <g id="voltage-bracket">
+              <line x1="98" y1="160" x2="98" y2="440" stroke="#ffd166" stroke-width="4" />
+              <polygon points="98,148 88,170 108,170" fill="#ffd166" />
+              <polygon points="98,452 88,430 108,430" fill="#ffd166" />
+              <text
+                x="55"
+                y="300"
+                fill="#ffd166"
+                font-family="IBM Plex Mono, monospace"
+                font-size="24"
+                text-anchor="middle"
+                transform="rotate(-90 55 300)"
+              >
+                VOLTAGE&#8202;&#8202;THE PUSH
+              </text>
+            </g>
+
+            <circle id="charge-ball" cx="150" cy="150" r="24" fill="#ffd166" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- ============ Transition wipe 2: force -> circuit (10.0 - 11.3s) ============ -->
+      <section id="scene-wipe-2" class="clip" data-start="10.0" data-duration="1.3" data-track-index="9">
+        <div class="wipe-panel" id="wipe-panel-2"></div>
+      </section>
+
+      <!-- ============ Scene 3: the real circuit (10.2 - 18.0s) ============ -->
+      <section id="scene-circuit" class="clip" data-start="10.2" data-duration="7.8" data-track-index="2">
         <div class="scene-bg"></div>
         <div class="headline" id="circuit-title">Now, the real circuit</div>
 
@@ -385,8 +507,8 @@
         </div>
       </section>
 
-      <!-- ============ Scene 3: kinetic-type close (12.0 - 15.0s) ============ -->
-      <section id="scene-close" class="clip" data-start="12" data-duration="3" data-track-index="1">
+      <!-- ============ Scene 4: kinetic-type close (17.4 - 20.0s) ============ -->
+      <section id="scene-close" class="clip" data-start="17.4" data-duration="2.6" data-track-index="3">
         <div class="scene-bg"></div>
         <div class="close-wrap">
           <div class="close-line" id="close-line">
@@ -409,67 +531,97 @@
       /* =========================================================
          Scene 1 — water / pipe metaphor
          ========================================================= */
-      tl.fromTo(
-        "#water-title",
-        { opacity: 0, y: -28 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
-        0.1,
-      );
-      tl.to("#water-title", { opacity: 0, y: -18, duration: 0.35, ease: "power2.in" }, 1.55);
+      tl.fromTo("#water-title", { opacity: 0, y: -28 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1);
+      tl.to("#water-title", { opacity: 0, y: -18, duration: 0.35, ease: "power2.in" }, 1.7);
 
+      tl.fromTo("#flange-pump", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.25);
       tl.fromTo("#pump", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.7)" }, 0.35);
-      tl.fromTo("#pipe", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }, 0.5);
+      tl.fromTo("#pipe-casing", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }, 0.5);
+      tl.fromTo("#flange-valve", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.7);
       tl.fromTo("#valve", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" }, 0.85);
 
       // pump pulse (finite, loops through the scene)
-      tl.to("#pump", { scale: 1.12, duration: 0.42, ease: "sine.inOut", yoyo: true, repeat: 7 }, 0.9);
+      tl.to("#pump", { scale: 1.12, duration: 0.42, ease: "sine.inOut", yoyo: true, repeat: 10 }, 0.9);
 
-      // flowing water: scrolling stripe texture, finite repeat
-      tl.to("#pipe-stripes", { x: 1320, duration: 2.3, ease: "none", repeat: 1 }, 0.6);
+      // flowing water: two shimmering wave layers moving at different speeds (parallax), finite repeat
+      tl.to("#wave-1", { x: 1400, duration: 2.3, ease: "none", repeat: 1 }, 0.6);
+      tl.to("#wave-2", { x: -1400, duration: 2.8, ease: "none", repeat: 1 }, 0.6);
+      tl.to("#water-highlight", { x: 600, duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: 2 }, 0.6);
 
-      // drifting bubbles, straight-line flow across the pipe (distinct technique from scene 2's motion-path)
-      const bubbleTravel = 1080;
+      // drifting bubbles, straight-line flow across the pipe (distinct technique from scene 3's motion-path)
+      const bubbleTravel = 1180;
       [0, 1, 2].forEach((i, idx) => {
         const start = 0.65 + idx * 0.55;
         tl.fromTo(
           `#bubble-${i}`,
           { x: 0, opacity: 0 },
-          { x: bubbleTravel, opacity: 1, duration: 1.05, ease: "none", repeat: 3, yoyoEase: false },
+          { x: bubbleTravel, opacity: 1, duration: 1.05, ease: "none", repeat: 3 },
           start,
         );
         tl.fromTo(`#bubble-${i}`, { opacity: 0 }, { opacity: 0.9, duration: 0.2 }, start);
       });
 
       // water reaches the valve: it lights up (foreshadows the bulb)
-      tl.to("#valve-core", { opacity: 1, scale: 1.15, duration: 0.35, ease: "power2.out" }, 2.1);
-      tl.to("#valve-rays", { opacity: 1, duration: 0.3, ease: "power1.out" }, 2.1);
+      tl.to("#valve-core", { opacity: 1, scale: 1.15, duration: 0.35, ease: "power2.out" }, 2.5);
+      tl.to("#valve-rays", { opacity: 1, duration: 0.3, ease: "power1.out" }, 2.5);
+      tl.to("#valve-rays i", { scaleY: 1.4, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 5 }, 2.55);
+
+      /* =========================================================
+         Transition wipe 1: teal -> violet sweep covers, then reveals
+         ========================================================= */
+      tl.fromTo("#wipe-panel-1", { scaleY: 0 }, { scaleY: 1, duration: 0.32, ease: "power2.in" }, 4.8);
+      tl.to("#wipe-panel-1", { opacity: 0, duration: 0.42, ease: "power2.out" }, 5.5);
+
+      /* =========================================================
+         Scene 2 — force / voltage is the push
+         ========================================================= */
+      tl.fromTo("#force-title", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 6.0);
+      tl.to("#force-title", { opacity: 0, y: -14, duration: 0.35, ease: "power2.in" }, 7.3);
+
+      const slopeEdge = document.getElementById("hill-edge");
+      const slopeLen = slopeEdge.getTotalLength();
+      slopeEdge.style.strokeDasharray = String(slopeLen);
+      slopeEdge.style.strokeDashoffset = String(slopeLen);
+      tl.to("#hill-edge", { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 6.2);
+      tl.fromTo("#hill-wedge", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 6.5);
+      tl.fromTo("#label-high", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 6.6);
+      tl.fromTo("#label-low", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 6.75);
+      tl.fromTo("#voltage-bracket", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 6.9);
+
+      tl.fromTo(
+        "#charge-ball",
+        { opacity: 0, scale: 0.6 },
+        { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" },
+        7.6,
+      );
       tl.to(
-        "#valve-rays i",
-        { scaleY: 1.4, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 5 },
-        2.15,
+        "#charge-ball",
+        {
+          motionPath: { path: "#hill-edge", autoRotate: false },
+          duration: 1.4,
+          ease: "power2.in",
+        },
+        7.9,
       );
+      tl.fromTo(
+        "#charge-ball",
+        { scale: 1 },
+        { scale: 1.2, duration: 0.15, ease: "power2.out", yoyo: true, repeat: 1 },
+        9.3,
+      );
+      tl.to("#charge-ball", { scale: 1.08, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 2 }, 9.65);
 
       /* =========================================================
-         Transition wipe: teal -> cyan/amber sweep covers, then reveals
+         Transition wipe 2: violet/gold -> electric cyan
          ========================================================= */
-      tl.fromTo(
-        "#wipe-panel",
-        { scaleY: 0 },
-        { scaleY: 1, duration: 0.32, ease: "power2.in" },
-        4.9,
-      );
-      tl.to("#wipe-panel", { opacity: 0, duration: 0.42, ease: "power2.out" }, 5.5);
+      tl.fromTo("#wipe-panel-2", { scaleY: 0 }, { scaleY: 1, duration: 0.32, ease: "power2.in" }, 10.0);
+      tl.to("#wipe-panel-2", { opacity: 0, duration: 0.42, ease: "power2.out" }, 10.7);
 
       /* =========================================================
-         Scene 2 — the real circuit
+         Scene 3 — the real circuit
          ========================================================= */
-      tl.fromTo(
-        "#circuit-title",
-        { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" },
-        5.3,
-      );
-      tl.to("#circuit-title", { opacity: 0, y: -14, duration: 0.3, ease: "power2.in" }, 6.3);
+      tl.fromTo("#circuit-title", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 11.0);
+      tl.to("#circuit-title", { opacity: 0, y: -14, duration: 0.3, ease: "power2.in" }, 12.0);
 
       const wireSegs = document.querySelectorAll(".wire");
       wireSegs.forEach((p) => {
@@ -477,26 +629,26 @@
         p.style.strokeDasharray = String(len);
         p.style.strokeDashoffset = String(len);
       });
-      tl.to("#wire-seg-1", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 5.6);
+      tl.to("#wire-seg-1", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 11.3);
       tl.fromTo(
         "#battery-group",
         { opacity: 0, scale: 0.8 },
         { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(1.7)" },
-        5.95,
+        11.65,
       );
-      tl.to("#wire-seg-2", { strokeDashoffset: 0, duration: 0.55, ease: "power2.out" }, 6.25);
+      tl.to("#wire-seg-2", { strokeDashoffset: 0, duration: 0.55, ease: "power2.out" }, 11.95);
       tl.fromTo(
         "#bulb-group",
         { opacity: 0, scale: 0.8 },
         { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(1.7)" },
-        6.85,
+        12.5,
       );
-      tl.to("#wire-seg-3", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 7.15);
+      tl.to("#wire-seg-3", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 12.75);
 
       // current dots: 4 evenly spaced, looping around the loop
-      // cycle 1.1 x 4 iterations (1 run + repeat:3) spans exactly 7.6 -> 12.0
-      const CYCLE = 1.1;
-      const FLOW_START = 7.6;
+      // cycle 1.15 x 4 iterations (1 run + repeat:3) spans exactly 13.3 -> 17.9
+      const CYCLE = 1.15;
+      const FLOW_START = 13.3;
       const REPEATS = 3;
       for (let i = 0; i < 4; i++) {
         const startFrac = i * 0.25;
@@ -513,21 +665,21 @@
       }
 
       // bulb lights with a punchy flash once current arrives
-      tl.to("#bulb-flash", { opacity: 0.55, duration: 0.18, ease: "power1.out" }, 8.2);
-      tl.to("#bulb-flash", { opacity: 0, duration: 0.55, ease: "power1.in" }, 8.38);
-      tl.to("#bulb-glow", { opacity: 0.95, duration: 0.3, ease: "power1.out" }, 8.2);
-      tl.to("#bulb-rays", { opacity: 1, duration: 0.3, ease: "power1.out" }, 8.2);
-      tl.to("#bulb-outline", { fill: "#3a2a12", duration: 0.3, ease: "power1.out" }, 8.2);
-      tl.fromTo("#bulb-group", { scale: 1 }, { scale: 1.12, duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1 }, 8.2);
+      tl.to("#bulb-flash", { opacity: 0.55, duration: 0.18, ease: "power1.out" }, 13.9);
+      tl.to("#bulb-flash", { opacity: 0, duration: 0.55, ease: "power1.in" }, 14.08);
+      tl.to("#bulb-glow", { opacity: 0.95, duration: 0.3, ease: "power1.out" }, 13.9);
+      tl.to("#bulb-rays", { opacity: 1, duration: 0.3, ease: "power1.out" }, 13.9);
+      tl.to("#bulb-outline", { fill: "#3a2a12", duration: 0.3, ease: "power1.out" }, 13.9);
+      tl.fromTo("#bulb-group", { scale: 1 }, { scale: 1.12, duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1 }, 13.9);
 
       /* =========================================================
-         Scene 3 — kinetic-type close (per-word stagger)
+         Scene 4 — kinetic-type close (per-word stagger)
          ========================================================= */
       tl.fromTo(
         "#close-line .close-word",
         { opacity: 0, y: 26, scale: 0.9 },
         { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)", stagger: 0.09 },
-        12.25,
+        17.6,
       );
 
       window.__timelines["main"] = tl;
