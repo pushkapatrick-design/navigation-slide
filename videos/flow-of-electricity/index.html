@@ -28,45 +28,173 @@
         width: 1920px;
         height: 1080px;
         overflow: hidden;
-        background: radial-gradient(circle at 50% 38%, #0e1626 0%, #070b14 70%);
+        background: #070b14;
       }
       .clip {
         position: absolute;
         inset: 0;
         display: block;
       }
-
-      /* ---- Title / closing tagline ---- */
-      .headline-slot {
+      #scene-water {
+        z-index: 1;
+      }
+      #scene-circuit {
+        z-index: 1;
+      }
+      #scene-close {
+        z-index: 1;
+      }
+      #scene-wipe {
+        z-index: 10;
+      }
+      .scene-bg {
         position: absolute;
-        top: 88px;
+        inset: 0;
+      }
+      .headline {
+        position: absolute;
+        top: 96px;
         left: 0;
         width: 100%;
         text-align: center;
-      }
-      #title-text {
-        display: inline-block;
-        font-size: 68px;
+        font-size: 62px;
         font-weight: 700;
         letter-spacing: 0.03em;
-        color: #6fe0ff;
-        text-shadow: 0 0 28px rgba(111, 224, 255, 0.55);
         opacity: 0;
       }
-      #closing-text {
-        display: inline-block;
-        font-size: 40px;
-        font-weight: 400;
-        letter-spacing: 0.01em;
-        color: #cfeeff;
+      .sub-label {
+        position: absolute;
+        top: 186px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 26px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #9fe9ff;
         opacity: 0;
       }
 
-      /* ---- Diagram ---- */
+      /* ================= Scene 1 — water/pipe metaphor ================= */
+      #scene-water .scene-bg {
+        background: radial-gradient(circle at 50% 40%, #0e2a2a 0%, #070b14 70%);
+      }
+      #scene-water .headline {
+        color: #3fe7c8;
+        text-shadow: 0 0 26px rgba(63, 231, 200, 0.5);
+      }
+      .pipe {
+        position: absolute;
+        left: 300px;
+        top: 470px;
+        width: 1320px;
+        height: 150px;
+        border-radius: 75px;
+        background: linear-gradient(180deg, #123837 0%, #0b2422 100%);
+        border: 4px solid #2f6e64;
+        box-shadow: 0 0 40px rgba(63, 231, 200, 0.25);
+        overflow: hidden;
+        opacity: 0;
+      }
+      .pipe-stripes {
+        position: absolute;
+        top: 0;
+        left: -1320px;
+        width: 2760px;
+        height: 100%;
+        background: repeating-linear-gradient(
+          115deg,
+          #1c5a54 0px,
+          #1c5a54 46px,
+          #2fa896 46px,
+          #2fa896 92px
+        );
+        opacity: 0.9;
+      }
+      .bubble {
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        width: 46px;
+        height: 46px;
+        margin-top: -23px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #eafffa 0%, #3fe7c8 55%, rgba(63, 231, 200, 0) 75%);
+        opacity: 0;
+      }
+      .pump {
+        position: absolute;
+        left: 156px;
+        top: 470px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #6ff5df 0%, #159685 60%, #0c4b43 100%);
+        border: 4px solid #3fe7c8;
+        box-shadow: 0 0 0 rgba(63, 231, 200, 0);
+        opacity: 0;
+      }
+      .valve {
+        position: absolute;
+        left: 1560px;
+        top: 494px;
+        width: 102px;
+        height: 102px;
+        border-radius: 50%;
+        background: #0b2422;
+        border: 5px solid #3fe7c8;
+        opacity: 0;
+      }
+      .valve-core {
+        position: absolute;
+        inset: 14px;
+        border-radius: 50%;
+        background: #eafffa;
+        opacity: 0;
+      }
+      .valve-rays {
+        position: absolute;
+        left: 1611px;
+        top: 545px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+      }
+      .valve-rays i {
+        position: absolute;
+        width: 6px;
+        height: 26px;
+        background: #3fe7c8;
+        border-radius: 3px;
+        left: -3px;
+        top: -80px;
+        transform-origin: 3px 80px;
+      }
+
+      /* ================= Transition wipe ================= */
+      .wipe-panel {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, #1c5a54 0%, #1f7fae 55%, #6fe0ff 100%);
+        transform: scaleY(0);
+        transform-origin: 50% 50%;
+      }
+
+      /* ================= Scene 2 — the real circuit ================= */
+      #scene-circuit .scene-bg {
+        background: radial-gradient(circle at 50% 38%, #0e1626 0%, #070b14 70%);
+      }
+      #scene-circuit .headline {
+        color: #6fe0ff;
+        text-shadow: 0 0 28px rgba(111, 224, 255, 0.55);
+        top: 70px;
+        font-size: 44px;
+      }
       .diagram-wrap {
         position: absolute;
         left: 260px;
-        top: 168px;
+        top: 190px;
         width: 1400px;
         height: 784px;
       }
@@ -132,25 +260,39 @@
       #bulb-glow {
         opacity: 0;
       }
-
-      /* ---- Captions ---- */
-      .caption-slot {
-        position: absolute;
-        bottom: 108px;
-        left: 0;
-        width: 100%;
-        text-align: center;
+      #bulb-flash {
+        opacity: 0;
       }
-      .caption-text {
+
+      /* ================= Scene 3 — kinetic close ================= */
+      #scene-close .scene-bg {
+        background: radial-gradient(circle at 50% 50%, #14243a 0%, #070b14 72%);
+      }
+      .close-wrap {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 220px;
+      }
+      .close-line {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0 20px;
+      }
+      .close-word {
         display: inline-block;
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 34px;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
+        font-size: 78px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
         color: #eaf6ff;
         opacity: 0;
-        padding-bottom: 14px;
-        border-bottom: 4px solid var(--accent, #6fe0ff);
+      }
+      .close-word.accent {
+        color: #ffb648;
+        text-shadow: 0 0 26px rgba(255, 182, 72, 0.55);
       }
     </style>
   </head>
@@ -163,8 +305,41 @@
       data-width="1920"
       data-height="1080"
     >
-      <!-- Diagram: visible for the whole piece; internal reveal is timeline-driven -->
-      <section id="diagram" class="clip" data-start="0" data-duration="15" data-track-index="0">
+      <!-- ============ Scene 1: water/pipe metaphor (0.0 - 5.3s) ============ -->
+      <section id="scene-water" class="clip" data-start="0" data-duration="5.3" data-track-index="0">
+        <div class="scene-bg"></div>
+        <div class="headline" id="water-title">Think of it like water</div>
+
+        <div class="pump" id="pump"></div>
+        <div class="pipe" id="pipe">
+          <div class="pipe-stripes" id="pipe-stripes" data-layout-allow-overflow></div>
+          <div class="bubble" id="bubble-0"></div>
+          <div class="bubble" id="bubble-1"></div>
+          <div class="bubble" id="bubble-2"></div>
+        </div>
+        <div class="valve" id="valve">
+          <div class="valve-core" id="valve-core"></div>
+        </div>
+        <div class="valve-rays" id="valve-rays">
+          <i style="transform: rotate(0deg)"></i>
+          <i style="transform: rotate(60deg)"></i>
+          <i style="transform: rotate(120deg)"></i>
+          <i style="transform: rotate(180deg)"></i>
+          <i style="transform: rotate(240deg)"></i>
+          <i style="transform: rotate(300deg)"></i>
+        </div>
+      </section>
+
+      <!-- ============ Transition wipe (4.9 - 6.0s), top layer ============ -->
+      <section id="scene-wipe" class="clip" data-start="4.9" data-duration="1.1" data-track-index="9">
+        <div class="wipe-panel" id="wipe-panel"></div>
+      </section>
+
+      <!-- ============ Scene 2: the real circuit (5.0 - 12.0s) ============ -->
+      <section id="scene-circuit" class="clip" data-start="5.0" data-duration="7.0" data-track-index="1">
+        <div class="scene-bg"></div>
+        <div class="headline" id="circuit-title">Now, the real circuit</div>
+
         <div class="diagram-wrap">
           <svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg">
             <!-- invisible loop used only for current-dot motion -->
@@ -187,6 +362,7 @@
 
             <!-- bulb symbol -->
             <g id="bulb-group">
+              <circle id="bulb-flash" cx="850" cy="300" r="150" fill="#ffb648" opacity="0" />
               <circle id="bulb-glow" cx="850" cy="300" r="72" fill="#ffb648" opacity="0" />
               <g id="bulb-rays">
                 <line x1="850" y1="238" x2="850" y2="216" />
@@ -209,62 +385,17 @@
         </div>
       </section>
 
-      <!-- Title -->
-      <section id="title-clip" class="clip" data-start="0" data-duration="2" data-track-index="1">
-        <div class="headline-slot"><span id="title-text">How Electricity Flows</span></div>
-      </section>
-
-      <!-- Captions -->
-      <section
-        id="caption-a-clip"
-        class="clip"
-        data-start="2.7"
-        data-duration="1.4"
-        data-track-index="2"
-      >
-        <div class="caption-slot">
-          <span id="caption-a" class="caption-text" style="--accent: #6fe0ff"
-            >A battery pushes the current</span
-          >
-        </div>
-      </section>
-      <section
-        id="caption-b-clip"
-        class="clip"
-        data-start="6.5"
-        data-duration="1.4"
-        data-track-index="2"
-      >
-        <div class="caption-slot">
-          <span id="caption-b" class="caption-text" style="--accent: #6fe0ff"
-            >Current flows through the circuit</span
-          >
-        </div>
-      </section>
-      <section
-        id="caption-c-clip"
-        class="clip"
-        data-start="10"
-        data-duration="1.4"
-        data-track-index="2"
-      >
-        <div class="caption-slot">
-          <span id="caption-c" class="caption-text" style="--accent: #ffb648"
-            >&#8230;and lights the bulb</span
-          >
-        </div>
-      </section>
-
-      <!-- Closing tagline -->
-      <section
-        id="closing-clip"
-        class="clip"
-        data-start="13"
-        data-duration="2"
-        data-track-index="1"
-      >
-        <div class="headline-slot">
-          <span id="closing-text">Electricity always flows in a closed loop.</span>
+      <!-- ============ Scene 3: kinetic-type close (12.0 - 15.0s) ============ -->
+      <section id="scene-close" class="clip" data-start="12" data-duration="3" data-track-index="1">
+        <div class="scene-bg"></div>
+        <div class="close-wrap">
+          <div class="close-line" id="close-line">
+            <span class="close-word">That&#8217;s</span>
+            <span class="close-word">the</span>
+            <span class="close-word accent">flow</span>
+            <span class="close-word">of</span>
+            <span class="close-word accent">electricity.</span>
+          </div>
         </div>
       </section>
     </div>
@@ -275,49 +406,104 @@
 
       const tl = gsap.timeline({ paused: true });
 
-      // ---- Title ----
-      tl.fromTo("#title-text", { opacity: 0, y: -28 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1);
-      tl.to("#title-text", { opacity: 0, y: -18, duration: 0.4, ease: "power2.in" }, 1.5);
+      /* =========================================================
+         Scene 1 — water / pipe metaphor
+         ========================================================= */
+      tl.fromTo(
+        "#water-title",
+        { opacity: 0, y: -28 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        0.1,
+      );
+      tl.to("#water-title", { opacity: 0, y: -18, duration: 0.35, ease: "power2.in" }, 1.55);
 
-      // ---- Wire segments (measure + draw-on) ----
+      tl.fromTo("#pump", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.7)" }, 0.35);
+      tl.fromTo("#pipe", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }, 0.5);
+      tl.fromTo("#valve", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" }, 0.85);
+
+      // pump pulse (finite, loops through the scene)
+      tl.to("#pump", { scale: 1.12, duration: 0.42, ease: "sine.inOut", yoyo: true, repeat: 7 }, 0.9);
+
+      // flowing water: scrolling stripe texture, finite repeat
+      tl.to("#pipe-stripes", { x: 1320, duration: 2.3, ease: "none", repeat: 1 }, 0.6);
+
+      // drifting bubbles, straight-line flow across the pipe (distinct technique from scene 2's motion-path)
+      const bubbleTravel = 1080;
+      [0, 1, 2].forEach((i, idx) => {
+        const start = 0.65 + idx * 0.55;
+        tl.fromTo(
+          `#bubble-${i}`,
+          { x: 0, opacity: 0 },
+          { x: bubbleTravel, opacity: 1, duration: 1.05, ease: "none", repeat: 3, yoyoEase: false },
+          start,
+        );
+        tl.fromTo(`#bubble-${i}`, { opacity: 0 }, { opacity: 0.9, duration: 0.2 }, start);
+      });
+
+      // water reaches the valve: it lights up (foreshadows the bulb)
+      tl.to("#valve-core", { opacity: 1, scale: 1.15, duration: 0.35, ease: "power2.out" }, 2.1);
+      tl.to("#valve-rays", { opacity: 1, duration: 0.3, ease: "power1.out" }, 2.1);
+      tl.to(
+        "#valve-rays i",
+        { scaleY: 1.4, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 5 },
+        2.15,
+      );
+
+      /* =========================================================
+         Transition wipe: teal -> cyan/amber sweep covers, then reveals
+         ========================================================= */
+      tl.fromTo(
+        "#wipe-panel",
+        { scaleY: 0 },
+        { scaleY: 1, duration: 0.32, ease: "power2.in" },
+        4.9,
+      );
+      tl.to("#wipe-panel", { opacity: 0, duration: 0.42, ease: "power2.out" }, 5.5);
+
+      /* =========================================================
+         Scene 2 — the real circuit
+         ========================================================= */
+      tl.fromTo(
+        "#circuit-title",
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" },
+        5.3,
+      );
+      tl.to("#circuit-title", { opacity: 0, y: -14, duration: 0.3, ease: "power2.in" }, 6.3);
+
       const wireSegs = document.querySelectorAll(".wire");
       wireSegs.forEach((p) => {
         const len = p.getTotalLength();
         p.style.strokeDasharray = String(len);
         p.style.strokeDashoffset = String(len);
       });
-      tl.to("#wire-seg-1", { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, 0.3);
+      tl.to("#wire-seg-1", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 5.6);
       tl.fromTo(
         "#battery-group",
         { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" },
-        0.75,
+        { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(1.7)" },
+        5.95,
       );
-      tl.to("#wire-seg-2", { strokeDashoffset: 0, duration: 0.7, ease: "power2.out" }, 1.05);
+      tl.to("#wire-seg-2", { strokeDashoffset: 0, duration: 0.55, ease: "power2.out" }, 6.25);
       tl.fromTo(
         "#bulb-group",
         { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" },
-        1.75,
+        { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(1.7)" },
+        6.85,
       );
-      tl.to("#wire-seg-3", { strokeDashoffset: 0, duration: 0.55, ease: "power2.out" }, 2.05);
+      tl.to("#wire-seg-3", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 7.15);
 
-      // ---- Current dots: 4 dots evenly spaced around the loop, looping ----
-      // cycle*5 (1 run + 4 repeats) spans exactly 2.6s -> 15.0s
-      const CYCLE = 2.48;
-      const FLOW_START = 2.6;
-      const REPEATS = 4;
+      // current dots: 4 evenly spaced, looping around the loop
+      // cycle 1.1 x 4 iterations (1 run + repeat:3) spans exactly 7.6 -> 12.0
+      const CYCLE = 1.1;
+      const FLOW_START = 7.6;
+      const REPEATS = 3;
       for (let i = 0; i < 4; i++) {
         const startFrac = i * 0.25;
         tl.to(
           `#flow-dot-${i}`,
           {
-            motionPath: {
-              path: "#flow-loop",
-              start: startFrac,
-              end: startFrac + 1,
-              autoRotate: false,
-            },
+            motionPath: { path: "#flow-loop", start: startFrac, end: startFrac + 1, autoRotate: false },
             duration: CYCLE,
             ease: "none",
             repeat: REPEATS,
@@ -326,27 +512,22 @@
         );
       }
 
-      // ---- Bulb lights once current reaches it ----
-      tl.to("#bulb-glow", { opacity: 0.9, duration: 0.6, ease: "power1.out" }, 3.4);
-      tl.to("#bulb-rays", { opacity: 1, duration: 0.6, ease: "power1.out" }, 3.4);
-      tl.to("#bulb-outline", { fill: "#3a2a12", duration: 0.6, ease: "power1.out" }, 3.4);
+      // bulb lights with a punchy flash once current arrives
+      tl.to("#bulb-flash", { opacity: 0.55, duration: 0.18, ease: "power1.out" }, 8.2);
+      tl.to("#bulb-flash", { opacity: 0, duration: 0.55, ease: "power1.in" }, 8.38);
+      tl.to("#bulb-glow", { opacity: 0.95, duration: 0.3, ease: "power1.out" }, 8.2);
+      tl.to("#bulb-rays", { opacity: 1, duration: 0.3, ease: "power1.out" }, 8.2);
+      tl.to("#bulb-outline", { fill: "#3a2a12", duration: 0.3, ease: "power1.out" }, 8.2);
+      tl.fromTo("#bulb-group", { scale: 1 }, { scale: 1.12, duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1 }, 8.2);
 
-      // ---- Captions ----
-      tl.fromTo("#caption-a", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, 2.7);
-      tl.to("#caption-a", { opacity: 0, duration: 0.2, ease: "power1.in" }, 3.9);
-
-      tl.fromTo("#caption-b", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, 6.5);
-      tl.to("#caption-b", { opacity: 0, duration: 0.2, ease: "power1.in" }, 7.7);
-
-      tl.fromTo("#caption-c", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, 10.0);
-      tl.to("#caption-c", { opacity: 0, duration: 0.2, ease: "power1.in" }, 11.2);
-
-      // ---- Closing tagline ----
+      /* =========================================================
+         Scene 3 — kinetic-type close (per-word stagger)
+         ========================================================= */
       tl.fromTo(
-        "#closing-text",
-        { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
-        13.0,
+        "#close-line .close-word",
+        { opacity: 0, y: 26, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)", stagger: 0.09 },
+        12.25,
       );
 
       window.__timelines["main"] = tl;
